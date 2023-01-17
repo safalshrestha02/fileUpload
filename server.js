@@ -3,17 +3,15 @@ const app = express();
 const fileUpload = require("express-fileupload");
 const path = require("path");
 
-app.use(fileUpload());
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "upload.html"));
 });
 
-app.post("/upload", (req, res) => {
+app.post("/upload", fileUpload({ createParentPath: true }), (req, res) => {
   const files = req.files;
-
   console.log(files);
 
-  return res.json({ status: "logged", message: "logged" });
+  return res.json({ status: "success", message: "success" });
 });
 
 app.listen(3000);

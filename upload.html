@@ -8,26 +8,30 @@
   </head>
   <body>
     <form id="fileUploadForm" enctype="mmultipart/form-data">
-      <input type="file" id="myFiles" multiple />
-      <input type="submit" />
+      <input type="file" id="myFiles" accept="image/*" multiple />
+      <button>Submit</button>
     </form>
   </body>
   <script>
     const form = document.getElementById("fileUploadForm");
+
     const sendFiles = async () => {
+      // Object
       const myFiles = document.getElementById("myFiles").files;
 
       const formData = new FormData();
 
-      Object.keys("myFiles").forEach((key) => {
+      Object.keys(myFiles).forEach((key) => {
         formData.append(myFiles.item(key).name, myFiles.item(key));
       });
+
       const response = await fetch("http://localhost:3000/upload", {
         method: "POST",
         body: formData,
       });
 
       const json = await response.json();
+
       console.log(json);
     };
 
