@@ -9,9 +9,9 @@ app.get("/", (req, res) => {
 
 app.post("/upload", fileUpload({ createParentPath: true }), (req, res) => {
   const files = req.files;
-  console.log(files);
+  console.log(files);   
 
-  return res.json({ status: "success", message: "success" });
+  return res.json({ status: 'success', message: 'success' })
 });
 
 app.listen(3000);
